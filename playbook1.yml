@@ -7,10 +7,6 @@
       yum: name=docker state=present update_cache=true
     - name: Start Docker
       service: name=docker state=started
-    - name: Stop Apache 
-      service: name=httpd state=stopped
-    - name: Unistall old Apache 
-      yum: name=httpd state=absent
 
 
     - name: Copy a new index.html file into place, backing up the original if it differs from the copied version
