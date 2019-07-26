@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Apache
+      yum: name=httpd state=present update_cache=true
+    - name: Start Apache
+      service: name=httpd state=started
+
+
+    - name: Copy a new index.html file into place, backing up the original if it differs from the copied version
+      copy:
+        src: /home/ansible/index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+        backup: yes
