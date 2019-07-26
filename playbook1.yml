@@ -3,17 +3,38 @@
   become: yes
 
   tasks:
-    - name: Install Apache
-      yum: name=httpd state=present update_cache=true
-    - name: Start Apache
-      service: name=httpd state=started
+    - name: Install Docker
+      yum: name=docker state=present update_cache=true
+    - name: Start Docker
+      service: name=docker state=started
+    - name: Stop Apache 
+      service: name=httpd state=stopped
+    - name: Unistall old Apache 
+      yum: name=httpd state=absent
 
 
     - name: Copy a new index.html file into place, backing up the original if it differs from the copied version
       copy:
         src: /home/ansible/index.html
-        dest: /var/www/html/index.html
-        owner: root
-        group: root
+        dest: /home/ec2-user/index.html
+        owner: ec2-user
+        group: ec2-user
         mode: '0644'
         backup: yes
+
+    - name: Copy a new DockerFile
+      copy:
+        src: /home/ansible/Dockerfile
+        dest: /home/ec2-user/Dockerfile
+        owner: ec2-user
+        group: ec2-user
+        mode: '0644'
+        backup: yes
+      
+    - name: Build a docker image
+      command: docker build -t web /home/ec2-user
+       
+    - name: Run a container
+      command: docker container run -d -p 80:80 web
+       
+       
