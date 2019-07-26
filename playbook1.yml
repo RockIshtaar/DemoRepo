@@ -29,8 +29,10 @@
       
     - name: Build a docker image
       command: docker build -t web /home/ec2-user
+    - name: Remove a container
+      command: docker container rm -f mynewapp
        
     - name: Run a container
-      command: docker container run -d -p 80:80 web
+      command: docker container run -d -p 80:80 --name mynewapp web
        
        
