@@ -11,7 +11,7 @@
     - name: Copy a new index.html file into place, backing up the original if it differs from the copied version
       copy:
         src: /home/ec2-user/index.html
-        dest: /var/wwwindex.html
+        dest: /var/www/index.html
         owner: ec2-user
         group: ec2-user
         mode: '0644'
