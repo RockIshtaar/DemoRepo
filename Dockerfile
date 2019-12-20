@@ -1,2 +1,2 @@
 FROM httpd:2.4
-COPY ./index.html /usr/local/apache2/htdocs/
+COPY /home/ec2-user/index.html /usr/local/apache2/htdocs/
