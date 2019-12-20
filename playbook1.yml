@@ -9,23 +9,7 @@
       service: name=docker state=started
 
 
-    - name: Copy a new index.html file into place, backing up the original if it differs from the copied version
-      copy:
-        src: /home/ansible/index.html
-        dest: /home/ec2-user/index.html
-        owner: ec2-user
-        group: ec2-user
-        mode: '0644'
-        backup: yes
 
-    - name: Copy a new DockerFile
-      copy:
-        src: /home/ansible/Dockerfile
-        dest: /home/ec2-user/Dockerfile
-        owner: ec2-user
-        group: ec2-user
-        mode: '0644'
-        backup: yes
       
     - name: Build a docker image
       command: docker build -t web /home/ec2-user
