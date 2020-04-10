@@ -1,6 +1,5 @@
 provider "aws" {
   region = "us-east-1"
-  
 }
 
 resource "aws_security_group" "WebSG" {
@@ -36,7 +35,7 @@ resource "aws_security_group" "WebSG" {
 
 
 resource "aws_instance" "web" {
-  ami           = "ami-0fc61db8544a617ed"
+  ami           = "ami-0323c3dd2da7fb37d"
   instance_type = "t2.micro"
   security_groups = ["${aws_security_group.WebSG.name}"]
   key_name = "KPKPKP"
